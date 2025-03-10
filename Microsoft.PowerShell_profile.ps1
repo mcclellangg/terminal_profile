@@ -1,9 +1,12 @@
 # INSTALL MODULES
 # Install-Module -Name Terminal-Icons
+# Install-Module -Name PS-Menu
+# Install-Module -Name BurntToast
 
 # IMPORTS
 Import-Module -Name Terminal-Icons
 Import-Module -Name PS-Menu
+Import-Module -Name BurntToast
 
 # VARIABLES
 $profile_path = "C:\Users\mccle\Documents\PowerShell"
@@ -35,10 +38,15 @@ function cdx {
     
     # Populate hash table
     $sorted_dirs | ForEach-Object { $repo_map[$_.Name] = $_.FullName }
-    $repo_name = menu @($repo_map.keys)
-    $selected_repo = $repo_map[$repo_name]
-    Set-Location -Path $selected_repo
-    Get-ChildItem # Display repo contents to user
+    try {
+        $repo_name = menu @($repo_map.keys)
+        $selected_repo = $repo_map[$repo_name]
+        Set-Location -Path $selected_repo
+        Get-ChildItem # Display repo contents to user
+    } catch {
+        Write-Host 
+        Write-Host "Error occurred: $_"
+    }
 }
 
 function help() {
