@@ -64,6 +64,7 @@ function help() {
 }
 
 # MAIN
+Set-Alias -Name np "C:\Program Files\Notepad++\notepad++.exe"
 Set-PSReadlineKeyHandler -Chord Alt+F4 -Function ViExit # Add close window shortcut
 if ($env:TERM_PROGRAM -ne "vscode") {
     Set-Location -Path $dev
