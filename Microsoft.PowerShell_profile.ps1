@@ -49,6 +49,20 @@ function cdx {
     }
 }
 
+function src ([string] $pattern, [string]$path=".") {
+    <# 
+    .SYNOPSIS 
+    Searches subdirectories for pattern given by user. (Searching current working directory by default)
+    
+    .EXAMPLE
+    src "error" "C:\Logs"
+
+    .NOTES
+    Uses "inline parameter declaration" (which I much prefer to the param block style)
+    #>
+    Get-ChildItem -Path $path -Recurse -File | Select-String -Pattern $pattern
+}
+
 function help() {
     Write-Output "--------------"
     Write-Output "NAVIGATION";
@@ -61,6 +75,7 @@ function help() {
     Write-Output "--------------"
     Write-Output "st - Renames the title window for terminal to current lowest directory";
     Write-Output "cdx - Displays a menu of code repos, changes location to one selected by user";
+    Write-Output 'src - Search subdirs for pattern. EX - src "error" "C:\Logs"';
 }
 
 # MAIN
