@@ -32,6 +32,12 @@ function st {
     $host.UI.RawUI.WindowTitle = $lowest_directory
 }
 
+function mdl {
+    # Run md_linkify.py script to create markdown formatted links from user input
+    # This script is located in the dev/tools directory.
+    python "C:\Users\mccle\dev\tools\md_linkify\md_linkify.py" @args
+}
+
 function cdx {
     # Display code repos, and navigate to selected.
     $repo_map = [ordered]@{} # hash tables don't normally perserve order
@@ -77,6 +83,7 @@ function help() {
     Write-Output "st - Renames the title window for terminal to current lowest directory";
     Write-Output "cdx - Displays a menu of code repos, changes location to one selected by user";
     Write-Output 'src - Search subdirs for pattern. EX - src "error" "C:\Logs"';
+    Write-Output "mdl - Run md_linkify.py script to create markdown formatted links from user input";
 }
 
 # MAIN
