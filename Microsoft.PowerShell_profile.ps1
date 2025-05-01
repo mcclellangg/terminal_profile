@@ -86,8 +86,11 @@ function help() {
     Write-Output "mdl - Run md_linkify.py script to create markdown formatted links from user input";
 }
 
-# MAIN
+# ALIASES
 Set-Alias -Name np "C:\Program Files\Notepad++\notepad++.exe"
+Set-Alias -Name g -Value "C:\Program Files\Git\cmd\git.exe"
+
+# MAIN
 Set-PSReadlineKeyHandler -Chord Alt+F4 -Function ViExit # Add close window shortcut
 if ($env:TERM_PROGRAM -ne "vscode") {
     Set-Location -Path $dev
