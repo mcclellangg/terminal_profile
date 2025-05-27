@@ -9,11 +9,21 @@ Import-Module -Name PS-Menu
 Import-Module -Name BurntToast
 
 # VARIABLES
-$profile_path = "C:\Users\mccle\Documents\PowerShell"
-$dev = "C:\Users\mccle\dev"
-$para = "C:\Users\mccle\PARA"
-$repos = "C:\Users\mccle\dev\repos"
-$win_terminal_profile_path = "C:\Users\mccle\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+# Load from config
+$configPath = "$HOME\Documents\PowerShell\config.ps1" 
+
+try {
+    if (Test-Path $configPath) {
+        . $configPath
+        # Write-Host "✅ Config loaded successfully from $configPath" -ForegroundColor Green
+    }
+    else {
+        throw "Config file not found at: $configPath"
+    }
+}
+catch {
+    Write-Host "❌ Failed to load config: $_" -ForegroundColor Red
+}
 
 # FUNCTIONS
 function dev {
