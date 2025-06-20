@@ -35,6 +35,10 @@ function para {
     Set-Location -Path $para
 }
 
+function sketch {
+    Set-Location -Path $sketchbook
+}
+
 function st {
     # Set-Title
     $path = Get-Location
