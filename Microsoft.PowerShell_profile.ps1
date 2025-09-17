@@ -49,7 +49,7 @@ function st {
 function mdl {
     # Run md_linkify.py script to create markdown formatted links from user input
     # This script is located in the dev/tools directory.
-    python "C:\Users\mccle\dev\tools\md_linkify\md_linkify.py" @args
+    # python "C:\Users\mccle\dev\tools\md_linkify\md_linkify.py" @args
 }
 
 function cdx {
@@ -109,4 +109,4 @@ Set-PSReadlineKeyHandler -Chord Alt+F4 -Function ViExit # Add close window short
 if ($env:TERM_PROGRAM -ne "vscode") {
     Set-Location -Path $dev
 }
-oh-my-posh init pwsh --config "C:\Users\mccle\dev\terminal_themes\dracula.omp.json" | Invoke-Expression
+# oh-my-posh init pwsh --config "C:\Users\mccle\dev\terminal_themes\dracula.omp.json" | Invoke-Expression
