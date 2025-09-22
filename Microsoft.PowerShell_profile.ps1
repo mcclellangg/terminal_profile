@@ -109,4 +109,4 @@ Set-PSReadlineKeyHandler -Chord Alt+F4 -Function ViExit # Add close window short
 if ($env:TERM_PROGRAM -ne "vscode") {
     Set-Location -Path $dev
 }
-# oh-my-posh init pwsh --config "C:\Users\mccle\dev\terminal_themes\dracula.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config "C:\Users\mccle\dev\terminal_themes\dracula.omp.json" | Invoke-Expression
