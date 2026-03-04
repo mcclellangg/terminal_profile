@@ -3,12 +3,20 @@
 # Install-Module -Name PS-Menu
 # Install-Module -Name BurntToast
 
-# IMPORTS
+# IMPORTS # 
 Import-Module -Name Terminal-Icons
 Import-Module -Name PS-Menu
 Import-Module -Name BurntToast
 
-# VARIABLES
+# CONFIG #
+# Kept in a separate file
+# $profile_path = "C:\Users\mccle\Documents\PowerShell"
+# $dev = "C:\Users\mccle\dev"
+# $para = "C:\Users\mccle\vaults\PARA"
+# $repos = "C:\Users\mccle\dev\repos"
+# $win_terminal_profile_path = "C:\Users\mccle\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+
+# VARIABLES #
 # Load from config
 $configPath = "$HOME\Documents\PowerShell\config.ps1" 
 
@@ -31,14 +39,6 @@ function dev {
     Get-ChildItem 
 }
 
-function para {
-    Set-Location -Path $para
-}
-
-function sketch {
-    Set-Location -Path $sketchbook
-}
-
 function st {
     # Set-Title
     $path = Get-Location
@@ -46,11 +46,17 @@ function st {
     $host.UI.RawUI.WindowTitle = $lowest_directory
 }
 
-function mdl {
-    # Run md_linkify.py script to create markdown formatted links from user input
-    # This script is located in the dev/tools directory.
-    # python "C:\Users\mccle\dev\tools\md_linkify\md_linkify.py" @args
+function tkt {
+    $tkt_path = "C:\Users\mccle\dev\tools\tk_timer"
+    if (Test-Path $tkt_path) {
+        Set-Location $tkt_path
+        Write-Host "### START TIMER ###`n>>> uv run python .\timer.py -m 10"
+    }
+    else {
+        Write-Host "INVALID tkt_path: $tkt_path"
+    }
 }
+
 
 function cdx {
     # Display code repos, and navigate to selected.
@@ -70,20 +76,8 @@ function cdx {
     }
 }
 
-function src ([string] $pattern, [string]$path=".") {
-    <# 
-    .SYNOPSIS 
-    Searches subdirectories for pattern given by user. (Searching current working directory by default)
-    
-    .EXAMPLE
-    src "error" "C:\Logs"
 
-    .NOTES
-    Uses "inline parameter declaration" (which I much prefer to the param block style)
-    #>
-    Get-ChildItem -Path $path -Recurse -File | Select-String -Pattern $pattern
-}
-
+# I sorta don't like that this overrides a common function of PowerShell
 function help() {
     Write-Output "--------------"
     Write-Output "NAVIGATION";
@@ -96,15 +90,15 @@ function help() {
     Write-Output "--------------"
     Write-Output "st - Renames the title window for terminal to current lowest directory";
     Write-Output "cdx - Displays a menu of code repos, changes location to one selected by user";
-    Write-Output 'src - Search subdirs for pattern. EX - src "error" "C:\Logs"';
-    Write-Output "mdl - Run md_linkify.py script to create markdown formatted links from user input";
+    Write-Output "tkt - Change to tkinter timer dir;"
 }
 
-# ALIASES
+# ALIASES #
 Set-Alias -Name np "C:\Program Files\Notepad++\notepad++.exe"
 Set-Alias -Name g -Value "C:\Program Files\Git\cmd\git.exe"
+Set-Alias -Name subl -Value subl.exe
 
-# MAIN
+# MAIN #
 Set-PSReadlineKeyHandler -Chord Alt+F4 -Function ViExit # Add close window shortcut
 if ($env:TERM_PROGRAM -ne "vscode") {
     Set-Location -Path $dev
